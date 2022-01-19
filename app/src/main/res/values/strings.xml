@@ -25,7 +25,8 @@
     <string name="WindSpeed">WindSpeed: </string>
     <string name="FirstName">FirstName</string>
     <string name="LastName">LastName</string>
-    <string name="Submit">Submit</string>
+    <string name="Submit">Save</string>
+    <string name="cancel">Cancel</string>
 
     <string name="firstName_cannot_be_null">FirstName cannot be empty</string>
     <string name="lastName_cannot_be_null">LastName cannot be empty</string>

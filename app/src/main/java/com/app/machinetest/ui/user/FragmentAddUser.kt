@@ -62,7 +62,9 @@ class FragmentAddUser : Fragment() {
                 showToast(resources.getString(R.string.Add_User_successfully))
                 requireActivity().onBackPressed()
             })
-
+            binding.cancel.setOnClickListener {
+                requireActivity().onBackPressed()
+            }
             binding.subBtn.setOnClickListener {
 
                 if (validateData()) {
