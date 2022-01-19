@@ -58,7 +58,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        //  viewModel.getAllUsersData()
+        viewModel.getAllUsersData()
 
     }
 
@@ -76,22 +76,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        println("@Iee"+"1")
+        println("@Iee" + "1")
         initView()
 
-        viewModel.getAllUserData.observe(viewLifecycleOwner, Observer {
-           println("@Iee"+"1")
-
-                mainList.addAll(it)
-            adapter?.submitList(it)
-
-
-        })
-
-        viewModel.deleteLiveData.observe(viewLifecycleOwner, {
-
-            //viewModel.getAllUsersData()
-        })
 
         val swipeGesture = object : SwipeGesture(requireActivity()) {
             override fun onMove(
@@ -106,14 +93,19 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                 when (direction) {
                     ItemTouchHelper.LEFT -> {
+                        println("@SHOW" + viewHolder.absoluteAdapterPosition)
                         viewModel.deleteItem(mainList[viewHolder.absoluteAdapterPosition])
-                        mainList.remove(mainList[viewHolder.absoluteAdapterPosition])
-                        viewModel.updateLiveData(mainList)
-                        adapter?.submitList(mainList)
-                        adapter?.notifyDataSetChanged()
+                        if (mainList.size == 1) {
+
+                            adapter?.differ?.submitList(null)
+                            adapter?.notifyDataSetChanged()
+                        } else {
+                            mainList.remove(mainList[viewHolder.absoluteAdapterPosition])
+                            adapter?.differ?.submitList(mainList)
+                            adapter?.notifyDataSetChanged()
+                        }
 
 
-                        //showToast(mainList[viewHolder.absoluteAdapterPosition].userId.toString())
                     }
 
 
@@ -125,7 +117,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
 
 
-        viewModel.getAllUsersData()
+
         navController = Navigation.findNavController(view)
 
         binding.addBtn.setOnClickListener {
@@ -139,12 +131,36 @@ class HomeFragment : Fragment(), View.OnClickListener {
         navController?.navigate(R.id.action_homeFragment_to_weatherFragment2)
     }
 
-    fun initView() {
+    private fun initView() {
 
-        adapter = UserListAdapter(requireActivity(), this)
-        binding.userList.setHasFixedSize(true)
-        binding.userList.adapter = adapter
-        println("@Iee"+"2")
+
+        userListObserver()
+        deleteUserObserver()
+        println("@ENTE" + "initView")
+
+
+    }
+
+    private fun userListObserver() {
+        viewModel.getAllUserData.observe(viewLifecycleOwner, Observer {
+
+
+            adapter = UserListAdapter(requireActivity(), this)
+            binding.userList.setHasFixedSize(true)
+            binding.userList.adapter = adapter
+            mainList.addAll(it)
+            adapter?.differ?.submitList(it)
+            adapter?.notifyDataSetChanged()
+
+
+        })
+    }
+
+    fun deleteUserObserver() {
+        viewModel.deleteLiveData.observe(viewLifecycleOwner, {
+            println("@SHOWKK$it")
+            viewModel.getAllUsersData()
+        })
 
     }
 }
