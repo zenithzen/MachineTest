@@ -41,7 +41,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment : Fragment(), View.OnClickListener {
     private var navController: NavController? = null
-    private val mainList: MutableList<UserEntity> = mutableListOf()
+    private var mainList = ArrayList<UserEntity>()
+
 
     @Inject
     lateinit var preferenceHandler: PreferenceHandler
@@ -50,16 +51,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private val binding: FragmentHomeBinding by viewBinding()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
-
     override fun onResume() {
         super.onResume()
         viewModel.getAllUsersData()
-
     }
 
     override fun onCreateView(
@@ -76,7 +70,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        println("@Iee" + "1")
+
         initView()
 
 
@@ -93,35 +87,18 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                 when (direction) {
                     ItemTouchHelper.LEFT -> {
-                        println("@SHOW" + viewHolder.absoluteAdapterPosition)
                         viewModel.deleteItem(mainList[viewHolder.absoluteAdapterPosition])
-                        if (mainList.size == 1) {
-
-                            adapter?.differ?.submitList(null)
-                            adapter?.notifyDataSetChanged()
-                        } else {
-                            mainList.remove(mainList[viewHolder.absoluteAdapterPosition])
-                            adapter?.differ?.submitList(mainList)
-                            adapter?.notifyDataSetChanged()
-                        }
-
-
                     }
-
-
+                    ItemTouchHelper.RIGHT -> {
+                        viewModel.deleteItem(mainList[viewHolder.absoluteAdapterPosition])
+                    }
                 }
             }
         }
         val touchHelper = ItemTouchHelper(swipeGesture)
         touchHelper.attachToRecyclerView(binding.userList)
-
-
-
-
         navController = Navigation.findNavController(view)
-
         binding.addBtn.setOnClickListener {
-
             navController?.navigate(R.id.action_homeFragment_to_fragmentAddUser)
         }
     }
@@ -133,32 +110,26 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun initView() {
 
-
         userListObserver()
         deleteUserObserver()
-        println("@ENTE" + "initView")
 
 
     }
 
     private fun userListObserver() {
         viewModel.getAllUserData.observe(viewLifecycleOwner, Observer {
-
-
             adapter = UserListAdapter(requireActivity(), this)
             binding.userList.setHasFixedSize(true)
             binding.userList.adapter = adapter
+            mainList = arrayListOf()
             mainList.addAll(it)
-            adapter?.differ?.submitList(it)
-            adapter?.notifyDataSetChanged()
-
-
+            adapter?.differ?.submitList(mainList.map { it.copy() })
         })
     }
 
-    fun deleteUserObserver() {
+    private fun deleteUserObserver() {
         viewModel.deleteLiveData.observe(viewLifecycleOwner, {
-            println("@SHOWKK$it")
+            mainList = arrayListOf()
             viewModel.getAllUsersData()
         })
 

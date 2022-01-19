@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyMainApp</string>
+    <string name="app_name">MachineTest</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button">Button</string>
@@ -17,4 +17,19 @@
     <string name="firstName">FirstName: </string>
     <string name="lastName">LastName: </string>
     <string name="emailId">Email ID : </string>
+    <string name="users">Users</string>
+    <string name="Weather_Report">Weather Report</string>
+    <string name="Temperature">Temperature: </string>
+    <string name="WeatherType">Weather Type: </string>
+    <string name="Humidity">Humidity: </string>
+    <string name="WindSpeed">WindSpeed: </string>
+    <string name="FirstName">FirstName</string>
+    <string name="LastName">LastName</string>
+    <string name="Submit">Submit</string>
+
+    <string name="firstName_cannot_be_null">FirstName cannot be empty</string>
+    <string name="lastName_cannot_be_null">LastName cannot be empty</string>
+    <string name="email_cannot_be_null">Email cannot be empty</string>
+    <string name="Add_User_successfully">Add User successfully</string>
+
 </resources>

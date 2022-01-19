@@ -6,7 +6,7 @@ import android.widget.Toast
 import es.dmoral.toasty.Toasty
 import javax.inject.Inject
 
-/** Created by Jishnu P Dileep on 27-05-2021 */
+
 class StylishToastyUtils @Inject constructor(val mContext: Context) {
 
     fun showSuccessMessage(msg: String) {

@@ -82,7 +82,7 @@ class WeatherFragment : Fragment(), View.OnClickListener {
             binding.logOut -> {
 
                 preferenceHandler.isLogged = false
-                viewModel.clearDb()
+                //viewModel.clearDb()
                 navController?.navigate(R.id.action_weatherFragment_to_home)
 
 

@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
-/** Created by Jishnu P Dileep on 26-05-2021 */
+
 
 
 fun View.hide() {

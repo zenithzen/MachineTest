@@ -49,7 +49,6 @@ class FragmentAddUser : Fragment() {
         // Inflate the layout for this fragment
 
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,10 +57,9 @@ class FragmentAddUser : Fragment() {
         try {
 
 
-
             viewModel.insertUserData.observe(viewLifecycleOwner, Observer {
 
-               showToast("Add User successfully")
+                showToast(resources.getString(R.string.Add_User_successfully))
                 requireActivity().onBackPressed()
             })
 
@@ -74,31 +72,30 @@ class FragmentAddUser : Fragment() {
                         binding.lastName.text.toString(),
                         binding.email.text.toString()))
 
-                }else
-                {
-                    println("@XP" +"NO")
+                } else {
+
                 }
 
             }
         } catch (e: Exception) {
-            println("@XP" + e.message)
+
         }
     }
 
     override fun onDestroy() {
-        println("@XP" +"YES")
+
         super.onDestroy()
     }
 
     fun validateData(): Boolean {
         if (binding.firstName.text.toString().isEmpty()) {
-            showToast("FirstName cannot be empty")
+            showToast(resources.getString(R.string.firstName_cannot_be_null))
             return false
         } else if (binding.lastName.text.toString().isEmpty()) {
-            showToast("LastName cannot be empty")
+            showToast(resources.getString(R.string.lastName_cannot_be_null))
             return false
         } else if (binding.email.text.toString().isEmpty()) {
-            showToast("Email cannot be empty")
+            showToast(resources.getString(R.string.email_cannot_be_null))
             return false
         } else if (!isEmailValid(binding.email.text.toString())) {
             showToast(resources.getString(R.string.valid_email))

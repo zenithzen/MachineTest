@@ -5,7 +5,7 @@ import androidx.core.content.edit
 import javax.inject.Inject
 
 
-/** Created by Jishnu P Dileep on 26-05-2021 */
+
 
 class PreferenceHandler @Inject constructor(
     val sharedPreferences: SharedPreferences,

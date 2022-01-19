@@ -6,7 +6,7 @@ import com.app.machinetest.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
-/** Created by Jishnu P Dileep on 27-05-2021 */
+
 
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, url: String?) {

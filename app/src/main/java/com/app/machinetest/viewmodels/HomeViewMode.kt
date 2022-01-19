@@ -32,16 +32,6 @@ class HomeViewMode @Inject constructor(
         _getAllUserData.postValue(mainRepository.fetchUsers())
     }
 
-    /* fun delete(id: Long) = viewModelScope.launch {
-
-         withContext(Dispatchers.IO)
-         {
-             //_deleteLiveData.postValue()
-             mainRepository.deleteItemById(id)
-         }
-
-     }*/
-
     fun deleteItem(item: UserEntity) = viewModelScope.launch {
         _deleteLiveData.postValue(mainRepository?.deleteItem(item))
 

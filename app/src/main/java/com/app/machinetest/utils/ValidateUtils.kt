@@ -4,7 +4,7 @@ import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-/** Created by Jishnu P Dileep on 27-05-2021 */
+
 
 fun isEmailValid(email: String): Boolean {
     val regExpn = ("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"

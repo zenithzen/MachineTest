@@ -10,7 +10,7 @@ import org.json.JSONException
 import retrofit2.Response
 import java.net.UnknownHostException
 
-/** Created by Jishnu P Dileep on 27-05-2021 */
+
 
 data class BaseResult<out T>(val status: Status, val data: T?, val message: String?) {
 

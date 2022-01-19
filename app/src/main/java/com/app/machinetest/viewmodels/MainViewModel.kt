@@ -22,21 +22,9 @@ class MainViewModel @Inject constructor(
     private val mainRepository: AppRepository,
 ) : ViewModel() {
 
-
-
-
     private val _getWeatherData = MutableLiveData<BaseResult<Climate>>()
     val getWeatherData: LiveData<BaseResult<Climate>>
         get() = _getWeatherData
-
-
-
-
-
-
-
-    //For get inserted Data
-
 
     fun clearDb() = viewModelScope.launch {
         withContext(Dispatchers.IO)
@@ -45,10 +33,6 @@ class MainViewModel @Inject constructor(
         }
 
     }
-
-
-
-
     fun getWeatherData(urlData: String) {
         viewModelScope.launch {
             _getWeatherData.postValue(BaseResult.loading(null))

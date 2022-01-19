@@ -19,7 +19,6 @@ class AppRepository @Inject constructor(
     ) {
 
     //retrofit
-    suspend fun getPosts() = safeApiCall { apiHelper.getPosts() }
     suspend fun getWeatherData(urlData: String) = safeApiCall { apiHelper.getWeatherData(urlData) }
 
     //for room DataBase
