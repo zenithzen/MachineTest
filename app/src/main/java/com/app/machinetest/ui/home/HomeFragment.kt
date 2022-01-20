@@ -109,7 +109,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun initView() {
-
+        adapter = UserListAdapter(requireActivity(), this)
+        binding.userList.setHasFixedSize(true)
+        binding.userList.adapter = adapter
         userListObserver()
         deleteUserObserver()
 
@@ -118,9 +120,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun userListObserver() {
         viewModel.getAllUserData.observe(viewLifecycleOwner, Observer {
-            adapter = UserListAdapter(requireActivity(), this)
-            binding.userList.setHasFixedSize(true)
-            binding.userList.adapter = adapter
+
             mainList = arrayListOf()
             mainList.addAll(it)
             adapter?.differ?.submitList(mainList.map { it.copy() })
